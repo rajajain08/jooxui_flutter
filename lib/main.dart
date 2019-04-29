@@ -95,60 +95,102 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('asdas'),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          // stops: [0.1, 0.5, 0.7, 0.9],
+          colors: [
+            Color.fromRGBO(112, 124, 146, 1),
+            Color.fromRGBO(32, 30, 35, 0),
+          ],
+        ),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: controller1,
-                itemCount: 10,
-                itemBuilder: (context, index) => Container(
-                    width: 160.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.yellow,
-                    )),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+              child: Container(
+                height: 100,
+                child: ScrollConfiguration(
+                  behavior: NoScrollSideEffect(),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller1,
+                    itemCount: 10,
+                    itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Container(
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.yellow,
+                              )),
+                        ),
+                  ),
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              //  height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: controller2,
-                itemCount: 10,
-                itemBuilder: (context, index) => Container(
-                    width: 160.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.yellow,
-                    )),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+              child: Container(
+                height: 100,
+                child: ScrollConfiguration(
+                  behavior: NoScrollSideEffect(),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller2,
+                    itemCount: 10,
+                    itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Container(
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.yellow,
+                              )),
+                        ),
+                  ),
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: controller3,
-                itemCount: 10,
-                itemBuilder: (context, index) => Container(
-                    width: 160.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.yellow,
-                    )),
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+              child: Container(
+                height: 100,
+                child: ScrollConfiguration(
+                  behavior: NoScrollSideEffect(),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    controller: controller3,
+                    itemCount: 10,
+                    itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Container(
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.yellow,
+                              )),
+                        ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+}
+
+class NoScrollSideEffect extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
