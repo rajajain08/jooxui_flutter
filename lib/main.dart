@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:jooxui/data.dart';
+import 'components/noscroll_side_effect.dart';
+import 'package:flare_flutter/flare_actor.dart';
 
 void main() => runApp(MaterialApp(home: MyApp()));
 
@@ -103,80 +106,116 @@ class _MyAppState extends State<MyApp> {
           // stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
             Color.fromRGBO(112, 124, 146, 1),
-            Color.fromRGBO(32, 30, 35, 0),
+            Color.fromRGBO(32, 30, 35, 1),
           ],
         ),
       ),
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: Container(
+            height: 35,
+            width: 180,
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(32, 30, 35, 1),
+                borderRadius: BorderRadius.circular(16)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.terrain,
+                      color: Color.fromRGBO(59, 219, 247, 1),
+                      size: 30,
+                    ),
+                    Text("500")
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.data_usage,
+                      color: Color.fromRGBO(59, 219, 247, 1),
+                      size: 30,
+                    ),
+                    Text("500")
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
         backgroundColor: Colors.transparent,
         body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-              child: Container(
-                height: 100,
-                child: ScrollConfiguration(
-                  behavior: NoScrollSideEffect(),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    controller: controller1,
-                    itemCount: 10,
-                    itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Container(
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.yellow,
-                              )),
-                        ),
-                  ),
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "Artists you love ",
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: ScrollConfiguration(
+                behavior: NoScrollSideEffect(),
+                child: ListView.builder(
+                  addAutomaticKeepAlives: false,
+                  scrollDirection: Axis.horizontal,
+                  controller: controller1,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) => data[index],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-              child: Container(
-                height: 100,
-                child: ScrollConfiguration(
-                  behavior: NoScrollSideEffect(),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    controller: controller2,
-                    itemCount: 10,
-                    itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Container(
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.yellow,
-                              )),
-                        ),
-                  ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: ScrollConfiguration(
+                behavior: NoScrollSideEffect(),
+                child: ListView.builder(
+                  addAutomaticKeepAlives: false,
+                  scrollDirection: Axis.horizontal,
+                  controller: controller2,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) => data[index],
                 ),
               ),
             ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: ScrollConfiguration(
+                behavior: NoScrollSideEffect(),
+                child: ListView.builder(
+                  addAutomaticKeepAlives: false,
+                  scrollDirection: Axis.horizontal,
+                  controller: controller3,
+                  itemCount: data.length,
+                  itemBuilder: (context, index) => data[index],
+                ),
+              ),
+            ),
+            Container(
+              height: 30,
+              width: 30,
+              child: FlareActor("assets/flare_animation/arrow.flr",
+
+                  //  alignment: Alignment(bulletXPoint, stream.data),
+                  fit: BoxFit.fitWidth,
+                  animation: "Untitled"),
+            ),
             Padding(
-              padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-              child: Container(
-                height: 100,
-                child: ScrollConfiguration(
-                  behavior: NoScrollSideEffect(),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    controller: controller3,
-                    itemCount: 10,
-                    itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Container(
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.yellow,
-                              )),
-                        ),
-                  ),
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  "Swipe Up",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             ),
@@ -184,13 +223,5 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
-  }
-}
-
-class NoScrollSideEffect extends ScrollBehavior {
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
   }
 }
